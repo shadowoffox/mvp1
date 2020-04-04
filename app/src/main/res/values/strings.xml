@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">mvp1</string>
+    <string name="tv_1">Счетчик 1</string>
+    <string name="tv_2">Счетчик2</string>
+    <string name="tv_3">Счетчик3</string>
 </resources>
