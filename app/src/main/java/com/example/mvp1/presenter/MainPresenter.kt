@@ -1,21 +1,23 @@
 package com.example.mvp1.presenter
 
-import com.example.mvp1.model.CountersMod
+import com.example.mvp1.model.repo.GitHubRepoRepo
+import com.example.mvp1.navigation.Screens
 import com.example.mvp1.view.MainView
+import moxy.InjectViewState
+import moxy.MvpPresenter
+import ru.terrakok.cicerone.Router
 
-class MainPresenter(val view:MainView, val model: CountersMod) {
+@InjectViewState
+class MainPresenter(val router:Router) : MvpPresenter<MainView>() {
 
-    fun setClick1(){
-        val nextValue=model.next(0)
-        view.setButtonText(0,nextValue.toString())
-    }
-    fun setClick2(){
-        val nextValue=model.next(1)
-        view.setButtonText(1,nextValue.toString())
-    }
-    fun setClick3(){
-        val nextValue=model.next(2)
-        view.setButtonText(2,nextValue.toString())
+
+    override fun onFirstViewAttach() {
+        super.onFirstViewAttach()
+        viewState.init()
+        router.replaceScreen(Screens.RepoScreen())
+        }
+    fun backClicked() {
+        router.exit()
     }
 
 }
