@@ -1,6 +1,7 @@
 package com.example.mvp1.model.repo
 
 import com.example.mvp1.model.entity.GithubRepository
+import io.reactivex.rxjava3.core.Observable
 
 class GitHubRepoRepo {
 
@@ -11,8 +12,7 @@ class GitHubRepoRepo {
         GithubRepository("4","name4",40)
     )
 
+    fun getRepo() = Observable.fromIterable(repositories)
 
-
-    fun getRepo() = repositories
 
 }

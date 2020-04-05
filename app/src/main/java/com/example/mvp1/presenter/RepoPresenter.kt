@@ -4,7 +4,6 @@ import com.example.mvp1.model.entity.GithubRepository
 import com.example.mvp1.model.repo.GitHubRepoRepo
 import com.example.mvp1.navigation.Screens
 import com.example.mvp1.presenter.list.IRepositoryListPresenter
-import com.example.mvp1.view.MainView
 import com.example.mvp1.view.RepoView
 import com.example.mvp1.view.list.RepositoryItemView
 import moxy.InjectViewState
@@ -44,11 +43,14 @@ class RepoPresenter(val repositoriesRepo: GitHubRepoRepo, val router:Router) : M
 
 
     fun loadRepo(){
-        repositoriesRepo.getRepo().let {
-            repositoryListPresenter.repositoies.clear()
-            repositoryListPresenter.repositoies.addAll(it)
-            viewState.updateList()
-        }
+        repositoryListPresenter.repositoies.clear()
+        repositoriesRepo.getRepo()
+            .subscribe({
+                timber.log.Timber.d("do it $it")
+                repositoryListPresenter.repositoies.add(it)
+            },{e ->
+                timber.log.Timber.e(e)
+            })
 
     }
     fun backClicked() : Boolean {
